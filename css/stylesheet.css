@@ -1,0 +1,62 @@
+.main {
+    border:1px solid white;
+    padding:0px;
+    width:100%;
+	height:100%;
+    overflow:hidden;
+}
+/*Stuff goes in here*/
+.left {
+    float:left;
+    width:39%;
+    height:100%;
+	background-color : rgb(50,50,50); 
+}
+/*the headline will go in this*/
+.left-top{
+	float:left;
+	vertical-align:top;
+    width:100%;
+    height:49%;
+}
+/*The selector will go in this thing*/
+.left-top-left-top{
+	float: left;
+	vertical-align:top;
+	width:100px;
+	border:1px solid white;
+}
+
+/*the basket table which the stack empties into for display*/
+.left-bottom{
+	float:left;
+	width:100%;
+	height:49%;
+	vertical-align:bottom;
+}
+.right {
+    float:right;
+    width:60%;
+    height:100%;
+	border:1px solid white;
+	background-color : rgb(50,50,50); 
+}
+h1#headline {
+	color:red;
+	float:left;
+}
+h2#graph-of{
+	color:white;
+}
+table#basket-table{
+	color: white;
+	
+}
+body {
+	background-color: black;
+}
+input[type="text"], textarea {
+
+  background-color : rgb(50,50,50); 
+  color: white;
+}

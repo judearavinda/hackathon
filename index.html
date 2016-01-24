@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<title>Here for Beer</title>
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+	<script type="text/javascript" src="scripts/jquery-2.1.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+	<div class="main">
+		<!-- Left side will shoe headlines  -->
+		<div class="left">
+			<!-- Topic Selector & Headline goes here -->
+			<div class="left-top">
+				<!-- Topic Selector goes here -->
+				<div class="left-top-left-top">
+				<form>
+					<input type="text" name="topic" value="Submit Query">
+				</form>
+				</div>
+				<!-- The Headline goes here -->
+				<h1 id="headline">Example Headline</h2>
+			</div>
+			
+			<!-- The basket table goes here -->
+			<div class="left-bottom">			
+				<table id="basket-table" style="width:100%">
+					<tr><td id="headline1">This is an Item</td> </tr>
+					<tr><td id="headline2">This is an Item</td> </tr>
+					<tr><td id="headline3">This is an Item</td> </tr>
+					<tr><td id="headline4">This is an Item</td> </tr>
+					<tr><td id="headline5">This is an Item</td> </tr>
+
+				</table>
+			</div>
+		</div>
+		<div class="right">
+			<!-- This header tags html should autofill from js -->
+			<h2 id="graph-of">Graph of GOOGL</h2>
+			<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+			<script type="text/javascript">
+				window.onload = function () {
+
+					var dps = []; // dataPoints
+
+					var chart = new CanvasJS.Chart("chartContainer",{
+						title :{
+							text: "Google"
+						},
+
+						axisX: {
+							title: "Time Elapsed(ms)"
+						},
+						axisY:{
+							prefix: '$',
+							includeZero: false,
+							title: "Stock Price($)"
+						}, 			
+						data: [{
+							type: "line",
+							dataPoints: dps 
+						}]
+					});
+					var time = new Date;
+					var hour = time.getHours();
+					var min = time.getMinutes();
+					var sec = time.getSeconds();
+					var strTime = String(hour)+":"+String(min)+":"+String(sec);
+					var xVal = 0;
+					var yVal = 100;	
+					var updateInterval = 250;
+					var dataLength = 500; // number of dataPoints visible at any point
+					
+					var updateChart = function (count) {
+						count = count || 1;
+						// count is number of times loop runs to generate random dataPoints.
+						
+						for (var j = 0; j < count; j++) {	
+							yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+							dps.push({
+								x: xVal,
+								y: yVal
+							});
+							xVal++;
+						};
+						if (dps.length > dataLength)
+						{
+							dps.shift();				
+						}
+						
+						chart.render();		
+
+					};
+
+					// generates first set of dataPoints
+					updateChart(dataLength); 
+
+					// update chart after specified time. 
+					setInterval(function(){updateChart()}, updateInterval); 
+
+				}
+				</script>
+			<div id="chartContainer" style="height: 300px; width: 100%;">
+			</div>
+			<!-- Add another sensor here -->
+
+			<div>
+			
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+$(document).ready(function() {
+  var headline_queue = [];
+  var headlines = ["Google to pay $140 million in back taxes in Britain","DJ Google Settles UK Tax Dispute","Reuters Insider - First winning week of the year for stocks","Google Strikes Deal With U.K. Tax Authority","Google to pay 130 mln pounds in back taxes in UK - FT","Google will pay 130m in back taxes to HMRC","Google paid Apple $1bn to be default iOS search engine  AAPL.OQ   GOOGL.OQ","Reuters Insider - Small victory for market bulls","Google Strikes Deal With U.K. Tax Authority","Google self-driving cars: Autonomous driving is a way off, new figures show","Search Deal with Apple Shows Google's Mobile Vulnerability","Google pays Apple $1 billion per year to keep its search bar on the iPhone"]
+  var updateInterval = 10000;
+  
+  for (i = 0; i < headlines.length; i++)
+  {
+	window.setInterval(append_headlines(headlines[i]),updateInterval);
+	console.log(headline_queue)
+  } 
+  
+  
+  
+  function append_headlines(line)
+  {
+	    if (headline_queue.length > 5)
+        {
+            //remove the first element
+            headline_queue.shift()
+            headline_queue.push(line)
+        }
+        else
+        {
+            headline_queue.push(line)
+        }
+		updateHeadlines();
+ 
+  }
+  
+  function updateHeadlines()
+  {
+    var headline = document.getElementById('headline');
+	headline.innerHTML = headline_queue[0];
+	for (number = 1 ; number < 6;number++) 
+		{
+            var headline = document.getElementById('headline'+ number);
+			console.log("stuff updated")
+			headline.innerHTML = headline_queue[number];
+        }
+  }
+  });
+  </script>
+</html>
